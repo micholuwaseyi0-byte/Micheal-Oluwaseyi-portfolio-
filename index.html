@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Michael Oluwaseyi Samuel — Marketing Strategist</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0e0e0e;
+    --paper: #f5f0e8;
+    --cream: #ede8dc;
+    --accent: #c8541a;
+    --accent2: #1a6cc8;
+    --mid: #6b6357;
+    --rule: #d4cec4;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    overflow-x: hidden;
+  }
+
+  /* ─── CURSOR ─── */
+  body { cursor: none; }
+  #cursor {
+    width: 10px; height: 10px;
+    background: var(--accent);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none; z-index: 9999;
+    transition: transform 0.15s ease;
+    mix-blend-mode: multiply;
+  }
+  #cursor-ring {
+    width: 34px; height: 34px;
+    border: 1.5px solid var(--accent);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none; z-index: 9998;
+    transition: transform 0.38s cubic-bezier(.25,.46,.45,.94), opacity 0.2s;
+    mix-blend-mode: multiply;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.4rem 3rem;
+    background: rgba(245,240,232,0.88);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .nav-logo {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+  .nav-links {
+    display: flex; gap: 2.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mid);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 5rem;
+    overflow: hidden;
+  }
+  .hero-left {
+    padding: 5rem 3rem 5rem 4rem;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative;
+  }
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 2.5rem; height: 1px;
+    background: var(--accent);
+  }
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1.02;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+  .hero-name em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--mid);
+    letter-spacing: 0.05em;
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+  }
+  .hero-bio {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: #3a342c;
+    max-width: 480px;
+    margin-bottom: 3rem;
+  }
+  .hero-bio strong { color: var(--ink); font-weight: 500; }
+  .hero-ctas {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0.85rem 2rem;
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-family: 'DM Mono', monospace;
+    transition: background 0.25s, transform 0.2s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--accent); transform: translateY(-2px); }
+  .btn-secondary {
+    border: 1.5px solid var(--ink);
+    color: var(--ink);
+    padding: 0.85rem 2rem;
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-family: 'DM Mono', monospace;
+    transition: border-color 0.25s, color 0.25s, transform 0.2s;
+    display: inline-block;
+  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+  .hero-right {
+    background: var(--cream);
+    position: relative;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-graphic {
+    width: 100%; height: 100%;
+    position: absolute;
+    top: 0; left: 0;
+  }
+  .hero-stats {
+    position: relative; z-index: 2;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+    width: 100%;
+  }
+  .stat-box {
+    background: rgba(245,240,232,0.92);
+    padding: 2.5rem 2rem;
+    border-top: 3px solid transparent;
+    transition: border-color 0.3s;
+  }
+  .stat-box:hover { border-color: var(--accent); }
+  .stat-box:nth-child(2) { background: var(--ink); }
+  .stat-box:nth-child(2) .stat-num, .stat-box:nth-child(2) .stat-label { color: var(--paper); }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .stat-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mid);
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* ─── SECTIONS ─── */
+  section { padding: 7rem 4rem; }
+  .section-header {
+    display: flex; align-items: center; gap: 1.5rem;
+    margin-bottom: 4rem;
+  }
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .section-rule {
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  /* ─── ABOUT ─── */
+  #about {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  #about .section-title { color: var(--paper); }
+  #about .section-num { color: var(--accent); }
+  #about .section-rule { background: #2a2520; }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 5rem;
+    align-items: start;
+  }
+  .about-text p {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: #c8c0b4;
+    margin-bottom: 1.5rem;
+  }
+  .about-text p strong { color: var(--paper); font-weight: 500; }
+
+  .skills-grid {
+    display: flex; flex-direction: column; gap: 1.5rem;
+  }
+  .skill-category {
+    border-top: 1px solid #2a2520;
+    padding-top: 1rem;
+  }
+  .skill-cat-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+  .skill-tags {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+  }
+  .skill-tag {
+    background: #1e1a16;
+    border: 1px solid #3a3028;
+    color: #c8c0b4;
+    padding: 0.3rem 0.75rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* ─── WORK EXPERIENCE ─── */
+  #experience { background: var(--paper); }
+
+  .exp-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 3rem;
+    padding: 3rem 0;
+    border-top: 1px solid var(--rule);
+  }
+  .exp-item:last-child { border-bottom: 1px solid var(--rule); }
+  .exp-meta {}
+  .exp-years {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.4rem;
+  }
+  .exp-org {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--mid);
+    line-height: 1.3;
+  }
+  .exp-role {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--ink);
+  }
+  .exp-body {
+    font-size: 0.92rem;
+    line-height: 1.75;
+    color: #5a5048;
+  }
+  .exp-bullets {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 0.6rem;
+    margin-top: 0.75rem;
+  }
+  .exp-bullets li {
+    padding-left: 1.2rem;
+    position: relative;
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: #5a5048;
+  }
+  .exp-bullets li::before {
+    content: '→';
+    position: absolute; left: 0;
+    color: var(--accent);
+    font-size: 0.75rem;
+    top: 0.1em;
+  }
+
+  /* ─── PROJECTS ─── */
+  #projects { background: var(--cream); }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .project-card {
+    background: var(--paper);
+    padding: 2.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  .project-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s ease;
+  }
+  .project-card:hover::before { transform: scaleX(1); }
+  .project-card:hover { transform: translateY(-4px); }
+
+  .project-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .project-tag::before {
+    content: '';
+    width: 20px; height: 1px;
+    background: var(--accent);
+  }
+  .project-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--ink);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  .project-desc {
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: var(--mid);
+    margin-bottom: 1.5rem;
+  }
+  .project-highlights {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .project-highlights li {
+    font-size: 0.78rem;
+    color: #5a5048;
+    padding-left: 1rem;
+    position: relative;
+    line-height: 1.5;
+  }
+  .project-highlights li::before {
+    content: '·';
+    position: absolute; left: 0;
+    color: var(--accent);
+    font-size: 1.2rem;
+    top: -0.2em;
+  }
+  .project-metrics {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+    border-top: 1px solid var(--rule);
+    padding-top: 1.2rem;
+  }
+  .metric-chip {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0.25rem 0.65rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* featured project */
+  .project-featured {
+    grid-column: span 2;
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .project-featured .project-title { color: var(--paper); }
+  .project-featured .project-desc { color: #a09888; }
+  .project-featured .project-highlights li { color: #a09888; }
+  .project-featured .project-tag { color: var(--accent); }
+  .project-featured .project-metrics { border-color: #2a2520; }
+  .project-featured .metric-chip { background: #1e1a16; border: 1px solid #3a3028; }
+  .project-featured::before { background: var(--accent); }
+
+  /* ─── CONTACT ─── */
+  #contact {
+    background: var(--ink);
+    color: var(--paper);
+    text-align: center;
+    padding: 8rem 4rem;
+  }
+  .contact-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+  .contact-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--paper);
+    margin-bottom: 2rem;
+  }
+  .contact-heading em { font-style: italic; color: var(--accent); }
+  .contact-sub {
+    font-size: 1rem;
+    color: #a09888;
+    max-width: 500px;
+    margin: 0 auto 3rem;
+    line-height: 1.8;
+  }
+  .contact-links {
+    display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;
+    margin-bottom: 4rem;
+  }
+  .contact-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: #a09888;
+    text-decoration: none;
+    border-bottom: 1px solid #3a3028;
+    padding-bottom: 0.2rem;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .contact-link:hover { color: var(--accent); border-color: var(--accent); }
+  .contact-email-big {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    color: var(--paper);
+    text-decoration: none;
+    display: block;
+    margin-bottom: 4rem;
+    transition: color 0.2s;
+  }
+  .contact-email-big:hover { color: var(--accent); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: #080806;
+    color: #3a3028;
+    padding: 1.5rem 4rem;
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 1.5rem; }
+    #hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 6rem 1.5rem 3rem; }
+    .hero-right { min-height: 350px; }
+    section { padding: 5rem 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .exp-item { grid-template-columns: 1fr; gap: 1rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .project-featured { grid-column: span 1; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">Michael Oluwaseyi</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Available for new projects</div>
+    <h1 class="hero-name">
+      Michael<br>
+      <em>Oluwaseyi</em><br>
+      Samuel
+    </h1>
+    <p class="hero-title">
+      Digital Marketer &amp; Marketing Strategist · Social Media Manager · Photographer
+    </p>
+    <p class="hero-bio">
+      From Lagos, Nigeria — I build brand presence, design <strong>multi-channel campaigns</strong>, and turn audience insights into measurable growth. Strategy, content, and creative execution — documented with data.
+    </p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn-primary">View My Work</a>
+      <a href="#contact" class="btn-secondary">Let's Talk →</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <svg class="hero-graphic" viewBox="0 0 600 700" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <rect width="600" height="700" fill="#ede8dc"/>
+      <circle cx="480" cy="80" r="180" fill="#d4cec4" opacity="0.4"/>
+      <circle cx="100" cy="600" r="220" fill="#c8c0b0" opacity="0.25"/>
+      <line x1="0" y1="350" x2="600" y2="350" stroke="#c8c0b0" stroke-width="1" opacity="0.5"/>
+      <line x1="300" y1="0" x2="300" y2="700" stroke="#c8c0b0" stroke-width="1" opacity="0.5"/>
+      <rect x="50" y="120" width="180" height="240" fill="none" stroke="#c8541a" stroke-width="1.5" opacity="0.3"/>
+      <rect x="370" y="340" width="160" height="210" fill="none" stroke="#1a6cc8" stroke-width="1.5" opacity="0.3"/>
+      <text x="50" y="680" font-family="'Playfair Display', serif" font-size="72" font-weight="900" fill="#d4cec4" opacity="0.5">MO</text>
+      <text x="300" y="200" font-family="'DM Mono', monospace" font-size="11" fill="#a09888" letter-spacing="3" transform="rotate(-90, 300, 200)">MARKETING STRATEGIST</text>
+      <circle cx="300" cy="350" r="4" fill="#c8541a"/>
+      <circle cx="150" cy="500" r="2" fill="#c8541a" opacity="0.5"/>
+      <circle cx="450" cy="200" r="2" fill="#1a6cc8" opacity="0.5"/>
+    </svg>
+    <div class="hero-stats">
+      <div class="stat-box">
+        <div class="stat-num">3+</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">B2B<br>+ B2C</div>
+        <div class="stat-label">Strategy Expertise</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Major Campaigns</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">₦500M+</div>
+        <div class="stat-label">Pipeline Targeted</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header reveal">
+    <span class="section-num">01</span>
+    <h2 class="section-title">About Me</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>I'm a <strong>digital marketer and marketing strategist</strong> based in Lagos, Nigeria, with a track record of building brand presence, designing multi-channel campaigns, and turning audience insights into measurable, real-world growth.</p>
+      <p>My work spans <strong>social media management for a government institution</strong>, B2B and B2C strategy for startups in fintech, fashion, and lifestyle — and photography that sharpens how brands show up visually.</p>
+      <p>I bring together strategy, content, and creative execution — and I document everything with data. I hold a <strong>BSc. in Microbiology</strong> from Federal University of Oye-Ekiti (2022), which trained me to think analytically, test hypotheses, and rely on evidence — skills that translate directly into how I approach marketing.</p>
+    </div>
+    <div class="skills-grid reveal">
+      <div class="skill-category">
+        <div class="skill-cat-title">Core Skills</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Marketing Strategy</span>
+          <span class="skill-tag">Social Media Mgmt</span>
+          <span class="skill-tag">Content Strategy</span>
+          <span class="skill-tag">Digital Advertising</span>
+          <span class="skill-tag">Email Marketing</span>
+          <span class="skill-tag">Campaign Planning</span>
+          <span class="skill-tag">Brand Storytelling</span>
+          <span class="skill-tag">Photography</span>
+          <span class="skill-tag">Customer Journey Mapping</span>
+          <span class="skill-tag">Analytics & KPIs</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-title">Tools & Platforms</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Meta Business Suite</span>
+          <span class="skill-tag">Canva</span>
+          <span class="skill-tag">Adobe Lightroom</span>
+          <span class="skill-tag">Google Analytics</span>
+          <span class="skill-tag">LinkedIn Campaign Mgr</span>
+          <span class="skill-tag">Mailchimp</span>
+          <span class="skill-tag">Google Ads</span>
+          <span class="skill-tag">WhatsApp Business</span>
+          <span class="skill-tag">TikTok Ads</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-title">Certifications</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Digital Marketing</span>
+          <span class="skill-tag">PMP — Project Management</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header reveal">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Work Experience</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="exp-item reveal">
+    <div class="exp-meta">
+      <div class="exp-years">2022 – Present</div>
+      <div class="exp-org">Self-Employed</div>
+    </div>
+    <div>
+      <div class="exp-role">Freelance Digital Marketer & Photographer</div>
+      <ul class="exp-bullets">
+        <li>Developed B2B and B2C marketing strategies for startup clients across fintech, fashion, and lifestyle — from initial brand positioning through to campaign execution and KPI review.</li>
+        <li>Created end-to-end marketing plans covering audience segmentation, customer journey mapping, ad campaign briefs, channel strategy, and performance frameworks.</li>
+        <li>Produced professional photography for clients including product shoots, event coverage, and personal branding sessions.</li>
+        <li>Delivered ongoing social media management including content creation, caption writing, hashtag strategy, and community engagement for multiple brands simultaneously.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="exp-item reveal">
+    <div class="exp-meta">
+      <div class="exp-years">2023 – 2024</div>
+      <div class="exp-org">Kogi State Ministry of Education</div>
+    </div>
+    <div>
+      <div class="exp-role">Social Media Manager</div>
+      <ul class="exp-bullets">
+        <li>Managed and grew the ministry's official accounts across Facebook, Instagram, and Twitter/X — building consistent engagement through platform-appropriate content and a structured editorial calendar.</li>
+        <li>Built monthly content calendars covering educational announcements, policy updates, events, and community engagement posts, ensuring regular and timely publication.</li>
+        <li>Monitored social media analytics and produced monthly performance reports for leadership, tracking reach, engagement rate, and follower growth.</li>
+        <li>Collaborated with ministry officials to develop clear, accessible messaging that communicated government education initiatives to the public.</li>
+        <li>Conceptualised and executed photo and video documentation of ministry events, programmes, and public-facing communications.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header reveal">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Selected Projects</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="projects-grid">
+
+    <!-- Featured -->
+    <div class="project-card project-featured reveal">
+      <div class="project-tag">B2B · Fintech · Flagship</div>
+      <h3 class="project-title">NovaMFB — B2B Marketing Strategy</h3>
+      <p class="project-desc">Comprehensive go-to-market strategy for a CBN-licensed startup microfinance bank targeting Nigeria's ₦15T+ underserved SME credit market across 41.5M+ MSMEs.</p>
+      <ul class="project-highlights">
+        <li>7-channel acquisition framework: LinkedIn, Email, Partnerships, Events, Field Sales, Google Ads & WhatsApp Business</li>
+        <li>5-stage digital B2B funnel — Awareness → Consideration → Decision → Onboarding → Retention</li>
+        <li>6 core product offerings including SME loans (₦500K–₦50M) and 48-hr invoice discounting</li>
+        <li>90-day go-to-market roadmap: Phase Build → Launch → Scale with ₦500M loan application target</li>
+        <li>Email drip campaign: "Invoice to Cash" — targeting 28% open rate, 6% CTR, ₦30M revenue pipeline</li>
+      </ul>
+      <div class="project-metrics">
+        <span class="metric-chip">₦500M Pipeline</span>
+        <span class="metric-chip">500+ Leads Target</span>
+        <span class="metric-chip">₦2,500 CPL</span>
+        <span class="metric-chip">85% Retention Goal</span>
+        <span class="metric-chip">28% Email Open Rate</span>
+      </div>
+    </div>
+
+    <!-- Adequate Wears -->
+    <div class="project-card reveal">
+      <div class="project-tag">B2C · Fashion · Brand Strategy</div>
+      <h3 class="project-title">Adequate Wears — Market Domination Plan</h3>
+      <p class="project-desc">Full B2C strategy for a Nigerian fashion retail startup expanding from footwear into clothing, competing against Zara, H&M and local boutiques in a ₦6.7T market.</p>
+      <ul class="project-highlights">
+        <li>Brand positioning: "Premium feel. Accessible price. Authentic Nigerian identity."</li>
+        <li>6 growth pillars including WhatsApp Commerce, Influencer Network, and themed collections</li>
+        <li>12-month phased execution roadmap from Ibadan-first launch to national expansion</li>
+        <li>Platform playbook: Instagram (4–5x/week), TikTok virality, Facebook ads, WhatsApp VIP</li>
+      </ul>
+      <div class="project-metrics">
+        <span class="metric-chip">+20% MoM Revenue</span>
+        <span class="metric-chip">5K+ IG Followers</span>
+        <span class="metric-chip">30% Repeat Rate</span>
+      </div>
+    </div>
+
+    <!-- Solemate -->
+    <div class="project-card reveal">
+      <div class="project-tag">B2C · Startup · Campaign Design</div>
+      <h3 class="project-title">Solemate — Mini Marketing Plan</h3>
+      <p class="project-desc">End-to-end 60-day launch campaign for an affordable premium sneaker startup targeting urban Nigerian youth and young professionals aged 18–30.</p>
+      <ul class="project-highlights">
+        <li>Mock $3,000 campaign across Instagram/Facebook ($1,200), TikTok ($1,000), Influencers ($500), Google ($300)</li>
+        <li>4-stage customer journey: Awareness → Consideration → Conversion → Retention</li>
+        <li>3-segment retargeting strategy — visitors, abandoned carts, and past buyers</li>
+        <li>8 KPIs including 3× ROAS, $0.80 CPC, 3.5% conversion rate, $120 LTV</li>
+      </ul>
+      <div class="project-metrics">
+        <span class="metric-chip">3× ROAS Target</span>
+        <span class="metric-chip">500 Sales / 60 Days</span>
+        <span class="metric-chip">5K Followers</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-eyebrow reveal">Open to opportunities</div>
+  <h2 class="contact-heading reveal">
+    Let's Build<br>
+    Something <em>Great</em><br>
+    Together.
+  </h2>
+  <p class="contact-sub reveal">
+    Whether you need a marketing strategy, a social media overhaul, or a complete brand campaign — I'm ready to bring the results.
+  </p>
+  <a href="mailto:micholuwaseyi0@gmail.com" class="contact-email-big reveal">micholuwaseyi0@gmail.com</a>
+  <div class="contact-links reveal">
+    <a href="tel:+2349035785632" class="contact-link">+234 903 578 5632</a>
+    <a href="https://linkedin.com/in/michael-oluwaseyi-samuel-79288335a" target="_blank" class="contact-link">LinkedIn</a>
+    <a href="mailto:micholuwaseyi0@gmail.com" class="contact-link">Email</a>
+    <span class="contact-link" style="cursor:default">Lagos, Nigeria</span>
+  </div>
+  <a href="#hero" class="btn-secondary" style="border-color: #3a3028; color: #a09888;">Back to Top ↑</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2025 Michael Oluwaseyi Samuel</span>
+  <span>Marketing Strategist · Lagos, Nigeria</span>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursor-ring');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.transform = `translate(${mx - 5}px, ${my - 5}px)`;
+  });
+  function animateRing() {
+    rx += (mx - rx - 17) * 0.12;
+    ry += (my - ry - 17) * 0.12;
+    ring.style.transform = `translate(${rx}px, ${ry}px)`;
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Stagger hero elements
+  document.querySelectorAll('.hero-left > *').forEach((el, i) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+    setTimeout(() => {
+      el.style.opacity = '1';
+      el.style.transform = 'translateY(0)';
+    }, 200 + i * 120);
+  });
+</script>
+</body>
+</html>
