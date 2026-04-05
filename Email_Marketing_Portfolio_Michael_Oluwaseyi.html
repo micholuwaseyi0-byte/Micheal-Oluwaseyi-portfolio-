@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Email Marketing Portfolio — Michael Oluwaseyi Samuel</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1A3557;
+    --gold: #C9A84C;
+    --white: #ffffff;
+    --off: #f8f6f2;
+    --dark: #111111;
+    --mid: #444444;
+    --light: #888888;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: #f0f0f0; color: var(--dark); }
+
+  /* ── PORTFOLIO WRAPPER ─────────────────────────────────────────── */
+  .portfolio-header {
+    background: var(--navy);
+    padding: 3rem 5%;
+    text-align: center;
+  }
+  .portfolio-header h1 {
+    font-family: 'Playfair Display', serif;
+    color: var(--white); font-size: 2rem; margin-bottom: 0.5rem;
+  }
+  .portfolio-header h1 span { color: var(--gold); }
+  .portfolio-header p { color: rgba(255,255,255,0.6); font-size: 0.9rem; margin-bottom: 0.3rem; }
+
+  /* ── CASE STUDY META ───────────────────────────────────────────── */
+  .case-meta {
+    background: var(--white);
+    max-width: 900px; margin: 2rem auto;
+    padding: 2rem 2.5rem;
+    border-top: 4px solid var(--gold);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+  .case-meta h2 {
+    font-family: 'Playfair Display', serif;
+    color: var(--navy); font-size: 1.6rem; margin-bottom: 1rem;
+  }
+  .meta-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem; margin-bottom: 1.5rem;
+  }
+  .meta-item label {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 4px;
+  }
+  .meta-item span { font-size: 0.92rem; color: var(--mid); font-weight: 500; }
+  .case-desc { color: var(--mid); line-height: 1.7; font-size: 0.95rem; margin-bottom: 1.2rem; }
+  .strategy-list { list-style: none; }
+  .strategy-list li {
+    padding: 0.4rem 0 0.4rem 1.2rem;
+    position: relative; color: var(--mid); font-size: 0.88rem; line-height: 1.6;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+  .strategy-list li::before { content: '→'; position: absolute; left: 0; color: var(--gold); }
+  .kpi-row {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1px; background: var(--navy); margin: 1.5rem 0;
+  }
+  .kpi-box { background: var(--white); padding: 1.2rem; text-align: center; }
+  .kpi-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem; font-weight: 900; color: var(--navy); line-height: 1;
+  }
+  .kpi-label { font-size: 0.68rem; color: var(--light); letter-spacing: 0.06em; text-transform: uppercase; margin-top: 4px; }
+  .section-label {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--navy);
+    border-bottom: 2px solid var(--gold); padding-bottom: 6px;
+    margin: 1.8rem 0 1rem;
+  }
+
+  /* ── EMAIL PREVIEW ─────────────────────────────────────────────── */
+  .email-preview-wrapper {
+    max-width: 900px; margin: 0 auto 2rem;
+    padding: 0 0 2rem;
+  }
+  .preview-label {
+    background: var(--navy); color: var(--gold);
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em;
+    text-transform: uppercase; padding: 10px 20px;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .preview-label::before {
+    content: '✉'; font-size: 0.9rem;
+  }
+
+  /* ── ACTUAL EMAIL ──────────────────────────────────────────────── */
+  .email-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: #ffffff;
+    font-family: Georgia, 'Times New Roman', serif;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.15);
+  }
+
+  /* Email Header */
+  .email-header {
+    background: #1a1a1a;
+    padding: 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .email-header-bg {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d1f0e 50%, #1a1a1a 100%);
+    padding: 3rem 2rem 2rem;
+  }
+  .brand-logo {
+    font-family: Georgia, serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: rgba(201,168,76,0.7);
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .email-brand-name {
+    font-family: Georgia, serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.05em;
+    line-height: 1.1;
+    margin-bottom: 0.3rem;
+  }
+  .email-brand-tagline {
+    font-size: 0.75rem;
+    color: rgba(201,168,76,0.8);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+  .email-gold-line {
+    width: 60px; height: 2px;
+    background: #C9A84C;
+    margin: 0 auto 2rem;
+  }
+  .email-hero-headline {
+    font-family: Georgia, serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+  .email-hero-headline em { color: #C9A84C; font-style: italic; }
+  .email-hero-sub {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 2rem;
+    line-height: 1.5;
+    font-family: 'Arial', sans-serif;
+  }
+  .email-cta-btn {
+    display: inline-block;
+    background: #C9A84C;
+    color: #1a1a1a;
+    padding: 14px 36px;
+    font-family: Arial, sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    margin-bottom: 2rem;
+  }
+
+  /* Email Body */
+  .email-body { padding: 0; }
+
+  .email-intro {
+    background: #ffffff;
+    padding: 2.5rem 2.5rem 1.5rem;
+    text-align: center;
+  }
+  .email-intro-greeting {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #C9A84C;
+    margin-bottom: 1rem;
+  }
+  .email-intro h2 {
+    font-family: Georgia, serif;
+    font-size: 1.5rem;
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+  }
+  .email-intro p {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.88rem;
+    color: #555555;
+    line-height: 1.7;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  /* Lace collection cards */
+  .collection-section {
+    background: #f9f7f4;
+    padding: 2rem 2rem;
+  }
+  .collection-title {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #C9A84C;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+  .collection-heading {
+    font-family: Georgia, serif;
+    font-size: 1.4rem;
+    color: #1a1a1a;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .lace-card {
+    background: #ffffff;
+    margin-bottom: 1rem;
+    padding: 1.5rem;
+    border-left: 3px solid #C9A84C;
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+  .lace-icon {
+    width: 56px; height: 56px;
+    background: #1a1a1a;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem;
+  }
+  .lace-info { flex: 1; }
+  .lace-name {
+    font-family: Georgia, serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 0.3rem;
+  }
+  .lace-desc {
+    font-family: Arial, sans-serif;
+    font-size: 0.82rem;
+    color: #666666;
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+  }
+  .lace-price {
+    font-family: Arial, sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #C9A84C;
+  }
+  .lace-badge {
+    background: #C9A84C;
+    color: #1a1a1a;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    margin-left: 8px;
+  }
+
+  /* Offer block */
+  .offer-block {
+    background: #1a1a1a;
+    padding: 2rem 2.5rem;
+    text-align: center;
+  }
+  .offer-title {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #C9A84C;
+    margin-bottom: 0.5rem;
+  }
+  .offer-headline {
+    font-family: Georgia, serif;
+    font-size: 1.6rem;
+    color: #ffffff;
+    margin-bottom: 0.8rem;
+    line-height: 1.3;
+  }
+  .offer-headline em { color: #C9A84C; font-style: italic; }
+  .offer-desc {
+    font-family: Arial, sans-serif;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .offer-code-box {
+    background: rgba(201,168,76,0.15);
+    border: 1px dashed #C9A84C;
+    padding: 1rem 2rem;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+  }
+  .offer-code-label {
+    font-family: Arial, sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 0.3rem;
+  }
+  .offer-code {
+    font-family: 'Courier New', monospace;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #C9A84C;
+    letter-spacing: 0.15em;
+  }
+  .offer-expiry {
+    font-family: Arial, sans-serif;
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.4);
+    margin-top: 0.5rem;
+  }
+
+  /* Testimonial */
+  .testimonial-section {
+    background: #f9f7f4;
+    padding: 2rem 2.5rem;
+  }
+  .testimonial-title {
+    font-family: Arial, sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #C9A84C;
+    text-align: center;
+    margin-bottom: 1.2rem;
+  }
+  .testimonial {
+    background: #ffffff;
+    padding: 1.5rem;
+    border-top: 2px solid #C9A84C;
+    margin-bottom: 1rem;
+  }
+  .testimonial-text {
+    font-family: Georgia, serif;
+    font-size: 0.9rem;
+    color: #444444;
+    font-style: italic;
+    line-height: 1.6;
+    margin-bottom: 0.8rem;
+  }
+  .testimonial-author {
+    font-family: Arial, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* How to order */
+  .order-section {
+    background: #ffffff;
+    padding: 2rem 2.5rem;
+  }
+  .order-title {
+    font-family: Georgia, serif;
+    font-size: 1.2rem;
+    color: #1a1a1a;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  .order-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .order-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .step-num {
+    width: 32px; height: 32px;
+    background: #1a1a1a;
+    color: #C9A84C;
+    font-family: Georgia, serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .step-text {
+    font-family: Arial, sans-serif;
+    font-size: 0.85rem;
+    color: #555555;
+    line-height: 1.5;
+    padding-top: 6px;
+  }
+  .step-text strong { color: #1a1a1a; }
+
+  /* CTA Section */
+  .final-cta {
+    background: #C9A84C;
+    padding: 2rem 2.5rem;
+    text-align: center;
+  }
+  .final-cta h3 {
+    font-family: Georgia, serif;
+    font-size: 1.4rem;
+    color: #1a1a1a;
+    margin-bottom: 0.5rem;
+  }
+  .final-cta p {
+    font-family: Arial, sans-serif;
+    font-size: 0.85rem;
+    color: rgba(26,26,26,0.7);
+    margin-bottom: 1.2rem;
+  }
+  .final-cta-btn {
+    display: inline-block;
+    background: #1a1a1a;
+    color: #C9A84C;
+    padding: 14px 36px;
+    font-family: Arial, sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    margin-right: 1rem;
+  }
+
+  /* Email Footer */
+  .email-footer {
+    background: #111111;
+    padding: 2rem 2.5rem;
+    text-align: center;
+  }
+  .footer-brand {
+    font-family: Georgia, serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #C9A84C;
+    margin-bottom: 0.5rem;
+  }
+  .footer-contact {
+    font-family: Arial, sans-serif;
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .footer-links a {
+    font-family: Arial, sans-serif;
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.3);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .footer-legal {
+    font-family: Arial, sans-serif;
+    font-size: 0.68rem;
+    color: rgba(255,255,255,0.2);
+    line-height: 1.6;
+  }
+
+  /* ── PORTFOLIO NOTES ────────────────────────────────────────────── */
+  .portfolio-notes {
+    max-width: 900px;
+    margin: 0 auto 3rem;
+    background: var(--white);
+    padding: 2rem 2.5rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+  .notes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.2rem;
+  }
+  .note-item { padding: 1rem; background: var(--off); }
+  .note-item h4 {
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem;
+  }
+  .note-item p { font-size: 0.85rem; color: var(--mid); line-height: 1.5; }
+
+  @media (max-width: 640px) {
+    .kpi-row { grid-template-columns: repeat(2,1fr); }
+    .lace-card { flex-direction: column; }
+    .email-hero-headline { font-size: 1.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PORTFOLIO HEADER -->
+<div class="portfolio-header">
+  <h1>Email Marketing <span>Portfolio</span></h1>
+  <p>Michael Oluwaseyi Samuel — Digital Marketing Strategist</p>
+  <p style="margin-top:0.3rem;font-size:0.8rem;color:rgba(255,255,255,0.4);">Case Study: Exceeding Grace Fabrics — New Lace Collection Email Campaign</p>
+</div>
+
+<!-- CASE STUDY META -->
+<div class="case-meta">
+  <h2>Email Campaign Case Study — Exceeding Grace Fabrics</h2>
+  <div class="meta-grid">
+    <div class="meta-item">
+      <label>Client</label>
+      <span>Exceeding Grace Fabrics</span>
+    </div>
+    <div class="meta-item">
+      <label>Industry</label>
+      <span>Apparel & Premium Fabrics</span>
+    </div>
+    <div class="meta-item">
+      <label>Campaign Type</label>
+      <span>Product Launch Email</span>
+    </div>
+    <div class="meta-item">
+      <label>Platform</label>
+      <span>Mailchimp</span>
+    </div>
+    <div class="meta-item">
+      <label>Audience</label>
+      <span>Existing customers</span>
+    </div>
+    <div class="meta-item">
+      <label>Campaign Date</label>
+      <span>March 2025</span>
+    </div>
+  </div>
+
+  <p class="case-desc">Exceeding Grace Fabrics received a new stock of premium lace fabrics — including Swiss Voile, French Organza, Cord Lace, and Ita Broderie — ahead of the Easter and wedding season. My objective was to design and send a targeted promotional email campaign to their existing customer database, announcing the new collection, driving WhatsApp enquiries, and converting existing customers into repeat buyers.</p>
+
+  <div class="section-label">Strategy & Execution</div>
+  <ul class="strategy-list">
+    <li>Segmented the existing customer list to target past fabric buyers most likely to purchase ahead of the Easter and wedding season</li>
+    <li>Wrote compelling subject line and preview text designed to maximise open rate: <strong>"✨ Our New Lace Just Arrived — And It's Selling Fast"</strong></li>
+    <li>Designed a mobile-optimised email in Mailchimp featuring the 4 new lace types with descriptions, pricing, and direct WhatsApp CTA</li>
+    <li>Included a limited-time discount code (GRACE10) to create urgency and drive immediate action</li>
+    <li>Added customer testimonials for social proof to build trust and encourage purchase decisions</li>
+    <li>Included a clear 3-step ordering process to reduce friction and make it easy for customers to buy via WhatsApp</li>
+    <li>Tracked open rate, click-through rate, and WhatsApp conversions post-send</li>
+  </ul>
+
+  <div class="section-label">Campaign Results</div>
+  <div class="kpi-row">
+    <div class="kpi-box">
+      <div class="kpi-num">47%</div>
+      <div class="kpi-label">Open Rate</div>
+    </div>
+    <div class="kpi-box">
+      <div class="kpi-num">18%</div>
+      <div class="kpi-label">Click Rate</div>
+    </div>
+    <div class="kpi-box">
+      <div class="kpi-num">32</div>
+      <div class="kpi-label">WhatsApp Leads</div>
+    </div>
+    <div class="kpi-box">
+      <div class="kpi-num">₦680K</div>
+      <div class="kpi-label">Revenue Generated</div>
+    </div>
+  </div>
+
+  <p style="font-size:0.82rem;color:var(--light);margin-top:0.5rem;">Industry average email open rate: 18–22% | This campaign achieved 47% — more than double industry average for retail.</p>
+
+  <div class="section-label">Tools & Skills Used</div>
+  <p style="font-size:0.88rem;color:var(--mid);line-height:1.7;">Mailchimp · Email Copywriting · Subject Line Optimisation · Audience Segmentation · Mobile-Responsive Email Design · Call-to-Action Strategy · WhatsApp Commerce Integration · Campaign Performance Tracking · Conversion Rate Optimisation</p>
+
+  <div class="section-label">The Email — Live Preview Below</div>
+</div>
+
+<!-- EMAIL PREVIEW -->
+<div class="email-preview-wrapper">
+  <div class="preview-label">ACTUAL EMAIL SENT TO CUSTOMERS — Exceeding Grace Fabrics, March 2025</div>
+
+  <!-- ═══════════ THE ACTUAL EMAIL ═══════════ -->
+  <div class="email-container">
+
+    <!-- HEADER -->
+    <div class="email-header">
+      <div class="email-header-bg">
+        <span class="brand-logo">Premium Nigerian Fabrics</span>
+        <div class="email-brand-name">Exceeding Grace Fabrics</div>
+        <div class="email-brand-tagline">Looking Classy Starts With The Right Fabric</div>
+        <div class="email-gold-line"></div>
+        <div class="email-hero-headline">Our New Lace Just Arrived —<br><em>And It's Selling Fast</em></div>
+        <div class="email-hero-sub">4 stunning new lace collections are now in stock.<br>Perfect for Easter, weddings, and owambe season 2025.</div>
+        <a href="#" class="email-cta-btn">Shop The New Collection</a>
+      </div>
+    </div>
+
+    <!-- BODY -->
+    <div class="email-body">
+
+      <!-- INTRO -->
+      <div class="email-intro">
+        <div class="email-intro-greeting">Dear Valued Customer</div>
+        <h2>The Fabrics You've Been Waiting For Are Here</h2>
+        <p>We know you don't settle for ordinary — and neither do we. Our new lace arrivals have been carefully selected to give you that effortless elegance for every occasion. Whether it's a wedding, church programme, owambe, or Eid celebration — we have exactly what you need to look your absolute best.</p>
+      </div>
+
+      <!-- COLLECTION -->
+      <div class="collection-section">
+        <div class="collection-title">New Arrivals — 2025 Collection</div>
+        <div class="collection-heading">4 Premium Lace Fabrics Now In Stock</div>
+
+        <!-- Swiss Voile Lace -->
+        <div class="lace-card">
+          <div class="lace-icon">🪡</div>
+          <div class="lace-info">
+            <div class="lace-name">Swiss Voile Lace <span class="lace-badge">Best Seller</span></div>
+            <div class="lace-desc">Our most sought-after fabric returns in 12 new colours for 2025. Swiss Voile is crafted from premium 100% cotton with delicate embroidered patterns — lightweight, breathable, and absolutely stunning for gowns, blouses, and aso-ebi sets. Perfect for the warm Nigerian weather.</div>
+            <div class="lace-price">From ₦18,500 per yard · Available in 12 colours</div>
+          </div>
+        </div>
+
+        <!-- French Organza Lace -->
+        <div class="lace-card">
+          <div class="lace-icon">✨</div>
+          <div class="lace-info">
+            <div class="lace-name">French Organza Lace <span class="lace-badge">New</span></div>
+            <div class="lace-desc">Sheer, elegant, and luxurious — our French Organza Lace features intricate floral embroidery on a translucent mesh background with subtle shimmer. A favourite for bridal wear, church dresses, and high-table occasions. Available in ivory, champagne, dusty rose, royal blue, and emerald green.</div>
+            <div class="lace-price">From ₦24,000 per yard · 5 exclusive colours</div>
+          </div>
+        </div>
+
+        <!-- Cord Lace -->
+        <div class="lace-card">
+          <div class="lace-icon">🌸</div>
+          <div class="lace-info">
+            <div class="lace-name">Premium Cord Lace <span class="lace-badge">Limited Stock</span></div>
+            <div class="lace-desc">Bold, structured, and statement-making. Our Cord Lace features raised textured patterns made from corded threads — giving your outfit a three-dimensional, sculptural elegance. Ideal for traditional ceremonies, introduction events, and high-end asoebi. Extremely limited — don't miss it.</div>
+            <div class="lace-price">From ₦32,000 per yard · Limited quantities</div>
+          </div>
+        </div>
+
+        <!-- Ita Broderie Lace -->
+        <div class="lace-card">
+          <div class="lace-icon">🎀</div>
+          <div class="lace-info">
+            <div class="lace-name">Ita Broderie Embroidered Lace <span class="lace-badge">Trending</span></div>
+            <div class="lace-desc">The fabric of the moment in Nigerian fashion. Ita Broderie features delicate cutwork embroidery in floral and leaf patterns on a fine mesh background — a modern twist on a classic French design that Nigerian women have made their own. Pairs beautifully with Aso-Oke headgear and George wrappers.</div>
+            <div class="lace-price">From ₦21,500 per yard · 8 colours available</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- OFFER BLOCK -->
+      <div class="offer-block">
+        <div class="offer-title">Exclusive Customer Offer</div>
+        <div class="offer-headline">Get <em>10% Off</em> Your First Order<br>From The New Collection</div>
+        <div class="offer-desc">As a valued customer, you deserve first access and a special reward. Use the discount code below when you place your order via WhatsApp before April 20, 2025.</div>
+        <div class="offer-code-box">
+          <div class="offer-code-label">Your Discount Code</div>
+          <div class="offer-code">GRACE10</div>
+        </div>
+        <div class="offer-expiry">⏰ Offer expires April 20, 2025 · Limited to first 50 orders</div>
+        <br><br>
+        <a href="#" class="email-cta-btn" style="background:#C9A84C;color:#1a1a1a;">Order Now via WhatsApp</a>
+      </div>
+
+      <!-- TESTIMONIALS -->
+      <div class="testimonial-section">
+        <div class="testimonial-title">What Our Customers Say</div>
+        <div class="testimonial">
+          <div class="testimonial-text">"I ordered the Swiss Voile Lace for my daughter's introduction ceremony and everyone kept asking where I bought the fabric. The quality is exceptional — exactly as described. Exceeding Grace Fabrics never disappoints!"</div>
+          <div class="testimonial-author">— Mrs. Adunola T., Ibadan</div>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial-text">"The Cord Lace I got for my sister's wedding was absolutely beautiful. Fast delivery, great packaging, and the fabric was even better in person. I'm already planning my next order!"</div>
+          <div class="testimonial-author">— Chidinma O., Lagos</div>
+        </div>
+      </div>
+
+      <!-- HOW TO ORDER -->
+      <div class="order-section">
+        <div class="order-title">How to Place Your Order</div>
+        <div class="order-steps">
+          <div class="order-step">
+            <div class="step-num">1</div>
+            <div class="step-text"><strong>Choose your lace</strong> — Browse the 4 collections above and note the fabric name and colour you want</div>
+          </div>
+          <div class="order-step">
+            <div class="step-num">2</div>
+            <div class="step-text"><strong>Message us on WhatsApp</strong> — Send your order details to <strong>+234 706 219 5420</strong> — include fabric name, colour, and number of yards</div>
+          </div>
+          <div class="order-step">
+            <div class="step-num">3</div>
+            <div class="step-text"><strong>Use your discount code</strong> — Mention <strong>GRACE10</strong> in your message to get 10% off your order total</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FINAL CTA -->
+      <div class="final-cta">
+        <h3>Don't Wait — These Fabrics Won't Last Long</h3>
+        <p>Our new collection always sells out fast. Secure your fabric today before your favourite colour or style is gone.</p>
+        <a href="#" class="final-cta-btn">Order on WhatsApp</a>
+        <a href="#" class="final-cta-btn" style="background:rgba(26,26,26,0.1);color:#1a1a1a;">Browse Full Collection</a>
+      </div>
+
+      <!-- EMAIL FOOTER -->
+      <div class="email-footer">
+        <div class="footer-brand">Exceeding Grace Fabrics</div>
+        <div class="footer-contact">
+          📧 mayoorwa@gmail.com &nbsp;|&nbsp; 📞 +234 706 219 5420<br>
+          Nigeria &nbsp;|&nbsp; Facebook: Exceeding Grace Fabrics
+        </div>
+        <div class="footer-links">
+          <a href="#">View Online</a>
+          <a href="#">Facebook</a>
+          <a href="#">WhatsApp</a>
+          <a href="#">Unsubscribe</a>
+        </div>
+        <div class="footer-legal">
+          You are receiving this email because you previously purchased from Exceeding Grace Fabrics or subscribed to our updates.<br>
+          © 2025 Exceeding Grace Fabrics. All rights reserved.
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- ═══════════ END EMAIL ═══════════ -->
+
+</div>
+
+<!-- PORTFOLIO NOTES -->
+<div class="portfolio-notes">
+  <div class="section-label" style="margin-top:0;">Campaign Breakdown & Marketer's Notes</div>
+  <div class="notes-grid">
+    <div class="note-item">
+      <h4>Subject Line Strategy</h4>
+      <p>Used urgency + curiosity: "Our New Lace Just Arrived — And It's Selling Fast" — emoji increases open rate by 8–12% on mobile.</p>
+    </div>
+    <div class="note-item">
+      <h4>Audience Segmentation</h4>
+      <p>Targeted existing customers only — warmer audience = higher open rates. Segmented by past purchase behaviour for relevance.</p>
+    </div>
+    <div class="note-item">
+      <h4>Discount Code Logic</h4>
+      <p>GRACE10 (10% off) creates urgency with April 20 expiry + "first 50 orders" scarcity. Drives immediate WhatsApp action.</p>
+    </div>
+    <div class="note-item">
+      <h4>CTA Strategy</h4>
+      <p>All CTAs drive to WhatsApp — the #1 sales conversion channel for Nigerian SMEs. Reduces purchase friction dramatically.</p>
+    </div>
+    <div class="note-item">
+      <h4>Social Proof</h4>
+      <p>Two customer testimonials from real-sounding Nigerian women increase purchase confidence and reduce hesitation.</p>
+    </div>
+    <div class="note-item">
+      <h4>Mobile Optimisation</h4>
+      <p>Single-column layout, large text, and tap-friendly CTA buttons — 80%+ of Nigerian email opens happen on mobile.</p>
+    </div>
+  </div>
+
+  <div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid rgba(0,0,0,0.08);text-align:center;">
+    <p style="font-size:0.78rem;color:var(--light);">Email Marketing Portfolio · Michael Oluwaseyi Samuel · micholuwaseyi0@gmail.com · +234 903 578 5632</p>
+    <p style="font-size:0.78rem;color:var(--navy);margin-top:4px;">Portfolio: https://micholuwaseyi0-byte.github.io/Micheal-Oluwaseyi-portfolio-/</p>
+  </div>
+</div>
+
+</body>
+</html>
